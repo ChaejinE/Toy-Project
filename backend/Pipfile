@@ -9,6 +9,7 @@ fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 alembic = "*"
 psycopg2-binary = "*"
+pydantic = {extras = ["email"], version = "*"}
 
 [dev-packages]
 
