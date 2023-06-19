@@ -2,14 +2,16 @@ from sqlalchemy.orm import Session
 from user.schema import UserCreate
 from user.models import User
 from passlib.context import CryptContext
+from passlib.hash import sha256_crypt
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def create_user(db: Session, user_create: UserCreate):
+    print(user_create.password1)
     db_user = User(
         username=user_create.username,
-        password=pwd_context.hash(user_create.password1),
+        password=sha256_crypt.encrypt(user_create.password1),
         email=user_create.email,
     )
     db.add(db_user)
