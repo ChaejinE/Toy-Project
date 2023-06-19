@@ -19,4 +19,6 @@ app.include_router(user_router)
 
 @app.get("/health_check", status_code=status.HTTP_200_OK)
 def health_check():
-    return {"health_check": True}
+    from fastapi.responses import JSONResponse
+
+    return JSONResponse({"health_check": True})
