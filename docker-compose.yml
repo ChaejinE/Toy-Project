@@ -1,12 +1,24 @@
 version: '3'
 
 services:
-  backend:
-
-  frontend:
-
   db:
-
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: cjlotto
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: db
+    networks:
+      - login_network
 
 volumes:
   session:
+
+
+networks:
+  login_network:
+    driver: bridge
