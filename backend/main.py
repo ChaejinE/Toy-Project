@@ -5,7 +5,7 @@ from user.router import router as user_router
 
 app = FastAPI()
 
-origins = [""]
+origins = ["http://localhost:8000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,6 +14,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 app.include_router(user_router)
 
 

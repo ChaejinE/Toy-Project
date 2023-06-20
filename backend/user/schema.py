@@ -1,15 +1,6 @@
 from pydantic import BaseModel, EmailStr, validator
 
 
-class Uesr(BaseModel):
-    id: int
-    username: str
-    email: str
-
-    class Config:
-        orm_mode = True
-
-
 class UserCreate(BaseModel):
     username: str
     password1: str
@@ -17,12 +8,13 @@ class UserCreate(BaseModel):
     email: EmailStr
 
     @validator("username", "password1", "password2", "email")
-    def not_emtpy(cls, v):
+    def valid_empty(cls, v):
         if not v or not v.strip():
             raise ValueError("Empty value")
+        return v
 
     @validator("password2")
-    def match_password(cls, v, values):
+    def valid_password(cls, v, values):
         if "password1" in values and v != values["password1"]:
             raise ValueError("Password realted Error")
         return v
