@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SignUp from './pages/signup.js'
+import SignUp from './pages/signup/signup.js'
 
 function App() {
   return (
