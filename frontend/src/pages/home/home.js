@@ -1,4 +1,4 @@
-import './signup.css'
+import './home.css'
 
 function Home() {
     return (
