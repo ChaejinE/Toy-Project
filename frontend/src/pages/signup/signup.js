@@ -1,37 +1,26 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import '../signin/signin.css'
-import createUser from './api/signup-api'
+import createUserAPI from './api/signup-api'
 import MyModal from '../utils/modal';
 
 function SignUp() {
     const bakcend_url = "http://localhost:8000/api/user/create";
     let navigate = useNavigate();
     let userData = { "firstName": null, "lastName": null, "email": null, "password1": null, "password2": null };
-    let [errStr, setErrStr] = useState("");
+    let [singUpResult, setSingUpResult] = useState({ "isExistNull": false, "errStr": "" });
     let [modal, setModal] = useState(false);
-    let singUpResult = {};
     let [modalData, setModalData] = useState({ "title": "", "content": "" });
-
-    let createUserhandler = () => {
-        singUpResult = createUser(bakcend_url, userData);
-        if (singUpResult.isExistNull) {
-            setErrStr(singUpResult.errStr);
-            modalData.content = "Exist Empty Item";
-            modalData.content = singUpResult.errStr;
-        }
-    }
 
     /* eslint-disable */
     useEffect(() => {
-        if (errStr) {
-            modalData.title = "Exist Empty Item";
-            modalData.content = errStr;
+        if (singUpResult.isExistNull) {
+            modalData.title = "Sign Up Error";
+            modalData.content = singUpResult.errStr;
             let copy = { ...modalData };
             setModalData(copy);
         }
-        return () => { setErrStr(""); }
-    }, [errStr]);
+    }, [singUpResult]);
 
     useEffect(() => {
         modalData.title && modalData.content ? setModal(true) : null;
@@ -90,7 +79,7 @@ function SignUp() {
                                             <input onChange={(e) => { userData.password2 = e.target.value; }} type="password" id="typePasswordX2" className="form-control form-control-lg" />
                                         </div>
 
-                                        <button onClick={() => { createUserhandler() }}
+                                        <button onClick={() => { createUserAPI(singUpResult, setSingUpResult, bakcend_url, userData) }}
                                             className="btn btn-outline-light btn-mg px-3 col-md-6 mb-4" type="button">
                                             Sign Up
                                         </button>
@@ -108,7 +97,7 @@ function SignUp() {
                     </div>
                 </div>
             </section >
-        </div>
+        </div >
     );
 }
 
