@@ -87,7 +87,7 @@ function SignUp() {
                                         <div className="mb-0">
                                             Do you have an account?
                                             <span onClick={() => { navigate("/") }}>
-                                                <p className="text-white-50 fw-bold spanointer">Sign In</p>
+                                                <p className="text-white-50 fw-bold spanointer pointer">Sign In</p>
                                             </span>
                                         </div>
                                     </div>
