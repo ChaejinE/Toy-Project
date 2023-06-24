@@ -14,8 +14,8 @@ function MyModal(props) {
                 </Modal.Header>
                 <Modal.Body>{props.content}</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
+                    <Button variant="danger" onClick={handleClose}>
+                        OK
                     </Button>
                 </Modal.Footer>
             </Modal>
