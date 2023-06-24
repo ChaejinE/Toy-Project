@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import '../signin/signin.css'
-import createUser from './api/signup-api.ts'
+import createUser from './api/signup-api'
 import MyModal from '../utils/modal';
 
 function SignUp() {
