@@ -38,12 +38,10 @@ function SignIn() {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <p className="mb-0">Don't you have an account?
-                                        <div onClick={() => { navigate("/sign-up") }}>
-                                            <p className="text-white-50 fw-bold pointer">Sign Up</p>
-                                        </div>
-                                    </p>
+                                <div className="mb-0">Don't you have an account?
+                                    <div onClick={() => { navigate("/sign-up") }}>
+                                        <p className="text-white-50 fw-bold pointer">Sign Up</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
