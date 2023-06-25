@@ -1,8 +1,8 @@
+from typing import Union
+import hmac
 import hashlib
 import base64
 import json
-import hmac
-from typing import Union
 
 """
 Reference : https://webisfree.com/2020-11-07/python-base64-%EC%9D%B8%EC%BD%94%EB%94%A9-%EB%94%94%EC%BD%94%EB%94%A9-%EB%B3%80%ED%99%98-%EB%B0%A9%EB%B2%95
