@@ -18,3 +18,9 @@ class UserCreate(BaseModel):
         if "password1" in values and v != values["password1"]:
             raise ValueError("Password realted Error")
         return v
+
+
+class Token(BaseModel):
+    username: str
+    access_token: str
+    token_type: str
