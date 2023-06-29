@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function createUserAPI(standardState, setStateFunc, url, userData) {
     if (Object.values(userData).some(item => item === null)) {
