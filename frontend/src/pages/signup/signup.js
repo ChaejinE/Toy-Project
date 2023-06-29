@@ -8,7 +8,7 @@ function SignUp() {
     const bakcend_url = "http://localhost:8000/api/user/create";
     let navigate = useNavigate();
     let userData = { "firstName": null, "lastName": null, "email": null, "password1": null, "password2": null };
-    let [singUpResult, setSingUpResult] = useState({ "isExistNull": false, "errStr": "" });
+    let [singUpResult, setSingUpResult] = useState({ "isExistNull": false, "errStr": "", "success": false });
     let [modal, setModal] = useState(false);
     let [modalData, setModalData] = useState({ "title": "", "content": "" });
 
@@ -20,6 +20,11 @@ function SignUp() {
             let copy = { ...modalData };
             setModalData(copy);
         }
+
+        if (singUpResult.success) {
+            navigate("/");
+        }
+
     }, [singUpResult]);
 
     useEffect(() => {

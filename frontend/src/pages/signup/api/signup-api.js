@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function createUserAPI(standardState, setStateFunc, url, userData) {
     if (Object.values(userData).some(item => item === null)) {
@@ -9,11 +10,21 @@ function createUserAPI(standardState, setStateFunc, url, userData) {
         setStateFunc(result);
     } else {
         userData["username"] = userData["firstName"] + userData["lastName"];
-        delete userData["firstName"]; delete userData["lastName"];
         const config = { "Content-Type": 'application/json' };
         axios.post(url, userData, config)
-            .then((result) => { console.log("enrollerUser success:\n", result); })
-            .catch((err) => { console.log("enrollUser Error:\n", err); })
+            .then((reponse) => {
+                console.log("enrollerUser success:\n", reponse);
+                standardState.success = true;
+                let result = { ...standardState };
+                setStateFunc(result);
+            })
+            .catch((err) => {
+                console.error("enrollUser Error:\n", err.message);
+                standardState.isExistNull = true;
+                standardState.errStr = err.message;
+                let result = { ...standardState };
+                setStateFunc(result);
+            })
     }
 }
 
