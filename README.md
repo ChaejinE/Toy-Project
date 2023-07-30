@@ -1,1 +1,1 @@
-# NewJeansMap
+# NewJeans
