@@ -2,6 +2,8 @@ import axios from "axios";
 import qs from "qs";
 
 function loginAPI(standardState, setStateFunc, url, logInData) {
+    url = url + '/login';
+
     if (Object.values(logInData).some(item => item === null)) {
         console.error("null is exsting of the values");
         standardState.isExistNull = true;

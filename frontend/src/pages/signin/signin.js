@@ -2,10 +2,13 @@ import './signin.css'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import loginAPI from "./api/signin-api"
+import kakaoLoginAPI from './api/kakao-api';
 import MyModal from '../utils/modal';
 
 function SignIn() {
-    const bakcend_url = "http://localhost:8000/api/user/login";
+    const bakcend_url = "http://localhost:8000/api/user";
+    // const kakao_url = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2e703c9d3df3d30e99e1054e9f77ce01&redirect_uri=http://localhost:3000"
+    const redirect_url = "http://localhost:3000";
     let navigate = useNavigate();
     let logInData = {
         "firstName": null, "lastName": null, "password": null
@@ -75,6 +78,9 @@ function SignIn() {
                                     <p className="small mb-5 pb-lg-2"><a className="text-white-50" href="#!">Forgot password?</a></p>
 
                                     <button onClick={() => { loginAPI(signInResult, setSingInResult, bakcend_url, logInData) }} className="btn btn-outline-light btn-lg px-5" type="submit">Sign In</button>
+                                    <p></p>
+                                    {/* <button onClick={() => { window.location.href = kakao_url; }} className="btn btn-outline-light btn-lg px-5">KaKao</button> */}
+                                    <button onClick={() => { kakaoLoginAPI(bakcend_url, redirect_url) }} className="btn btn-outline-light btn-lg px-5">KaKao</button>
 
                                     <div className="d-flex justify-content-center text-center mt-4 pt-1">
                                         <a href="#!" className="text-white"><i className="fab fa-facebook-f fa-lg"></i></a>
