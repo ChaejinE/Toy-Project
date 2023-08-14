@@ -7,7 +7,7 @@ function kakaoAPI(url) {
         .then((resp) => {
             let baseURL = "https://kauth.kakao.com/oauth/authorize?response_type=code";
             let clientID = "&client_id=" + resp.data.client_id;
-            let redirectURL = "&redirect_uri=" + "http://localhost:3000";
+            let redirectURL = "&redirect_uri=" + "http://localhost:3000/redirect";
             window.location.href = baseURL + clientID + redirectURL;
         })
         .catch((e) => { 
