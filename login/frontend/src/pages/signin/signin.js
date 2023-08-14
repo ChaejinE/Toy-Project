@@ -2,10 +2,11 @@ import './signin.css'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import loginAPI from "./api/signin-api"
+import kakaoAPI from './api/kakao-signin-api';
 import MyModal from '../utils/modal';
 
 function SignIn() {
-    const bakcend_url = "http://localhost:8000/api/user/login";
+    const bakcend_url = "http://localhost:8000/api/user";
     let navigate = useNavigate();
     let logInData = {
         "firstName": null, "lastName": null, "password": null
@@ -75,6 +76,7 @@ function SignIn() {
                                     <p className="small mb-5 pb-lg-2"><a className="text-white-50" href="#!">Forgot password?</a></p>
 
                                     <button onClick={() => { loginAPI(signInResult, setSingInResult, bakcend_url, logInData) }} className="btn btn-outline-light btn-lg px-5" type="submit">Sign In</button>
+                                    <button onClick={() => { kakaoAPI(bakcend_url) }} className="btn btn-outline-light btn-lg px-5" type="submit">KaKao</button>
 
                                     <div className="d-flex justify-content-center text-center mt-4 pt-1">
                                         <a href="#!" className="text-white"><i className="fab fa-facebook-f fa-lg"></i></a>

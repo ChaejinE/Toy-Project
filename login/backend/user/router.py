@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from user.schema import UserCreate, Token
 from user.crud import get_existing_user, create_user, get_user, pwd_context
@@ -21,7 +22,6 @@ def user_create(_user_create: UserCreate, db: Session = Depends(get_db)):
             status_code=status.HTTP_409_CONFLICT, detail="Already Existing User"
         )
     create_user(db=db, user_create=_user_create)
-
 
 @router.post("/login", response_model=Token)
 def login_for_access_token(
@@ -46,3 +46,8 @@ def login_for_access_token(
         "token_type": "jwt",
         "username": user.username,
     }
+    
+@router.get("/kakao/get/client_id", response_class=JSONResponse)
+def response_kakao_client_id():
+    fake_db_client_id = "2e703c9d3df3d30e99e1054e9f77ce01"
+    return {"client_id": fake_db_client_id}
