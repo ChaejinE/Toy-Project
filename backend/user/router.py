@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from fastapi.responses import RedirectResponse, HTMLResponse
+from fastapi.responses import RedirectResponse, HTMLResponse, JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from user.schema import UserCreate, Token
 from user.crud import get_existing_user, create_user, get_user, pwd_context
@@ -53,13 +53,10 @@ def login_for_access_token(
 @router.get("/kakao/auth")
 def login_kakao(redirect_url: str):
     print(redirect_url)
-    client_id = "2e703c9d3df3d30e99e1054e9f77ce01"
-    authorization_url = f"https://kauth.kakao.com/oauth/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_url}"
     try:
-        response = requests.get(url=authorization_url)
-        print(response.content.decode())
+        response = {"client_id" : "2e703c9d3df3d30e99e1054e9f77ce01"}
     except Exception as e:
         print(e)
         return {"success": False}
         
-    return HTMLResponse(response.content.decode())
+    return JSONResponse(response)
