@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
+from fastapi.responses import RedirectResponse, HTMLResponse, JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from user.schema import UserCreate, Token
 from user.crud import get_existing_user, create_user, get_user, pwd_context
@@ -8,6 +8,8 @@ from database import get_db
 from starlette import status
 from datetime import datetime, timedelta
 from jose import jwt
+
+import requests
 
 router = APIRouter(prefix="/api/user")
 TOKEN_EXPIRE_TIME = 60 * 24
@@ -22,6 +24,7 @@ def user_create(_user_create: UserCreate, db: Session = Depends(get_db)):
             status_code=status.HTTP_409_CONFLICT, detail="Already Existing User"
         )
     create_user(db=db, user_create=_user_create)
+
 
 @router.post("/login", response_model=Token)
 def login_for_access_token(
@@ -46,8 +49,14 @@ def login_for_access_token(
         "token_type": "jwt",
         "username": user.username,
     }
-    
-@router.get("/kakao/get/client_id", response_class=JSONResponse)
-def response_kakao_client_id():
-    fake_db_client_id = "2e703c9d3df3d30e99e1054e9f77ce01"
-    return {"client_id": fake_db_client_id}
+
+@router.get("/kakao/auth")
+def login_kakao(redirect_url: str):
+    print(redirect_url)
+    try:
+        response = {"client_id" : "2e703c9d3df3d30e99e1054e9f77ce01"}
+    except Exception as e:
+        print(e)
+        return {"success": False}
+        
+    return JSONResponse(response)
