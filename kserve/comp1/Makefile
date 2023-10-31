@@ -5,7 +5,9 @@ PLATFORM ?= ''
 
 pack:
 	pack build --builder=heroku/buildpacks:20 ${DOCKER_USER}/${IMG}:${VERSION}
-docker-push: pack
+docker-build:
+	docker build -t ${DOCKER_USER}/${IMG}:${VERSION} .
+docker-push: docker-build
 	docker push ${DOCKER_USER}/${IMG}:${VERSION}
 docker-push-mac: pack
 	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t ${DOCKER_USER}/${IMG}:${VERSION} --push .
