@@ -1,15 +1,13 @@
 FROM python:3.9-slim
-ARG WORKINGDIR=/usr/src/app
+ARG WORKINGDIR=/usr/src
+
+RUN apt-get update
+RUN pip install --upgrade pipenv
 
 WORKDIR ${WORKINGDIR}
-COPY Pipfile* ${WORKINGDIR}
-RUN apt-get update
-RUN pip install --upgrade && pip install --upgrade pipenv
-RUN cd ${WORKINGDIR} && pipenv install --dev --system --deploy
-RUN rm -rf ${WORKINGDIR}/Pipfile*
+COPY . ${WORKINGDIR}
+RUN pipenv install --system --deploy
 
 EXPOSE 8080
-
-COPY . ${WORKINGDIR}
 
 ENTRYPOINT [ "python", "app.py" ]
