@@ -6,7 +6,7 @@ RUN pip install --upgrade pipenv
 
 WORKDIR ${WORKINGDIR}
 COPY . ${WORKINGDIR}
-RUN pipenv install --system --deploy
+RUN pipenv install --dev --system --deploy
 
 EXPOSE 8080
 
