@@ -6,8 +6,7 @@ RUN pip install --upgrade pipenv
 
 WORKDIR ${WORKINGDIR}
 COPY . ${WORKINGDIR}
-RUN pipenv install --dev --system --deploy
-
+RUN pip install -r requirements.txt
 EXPOSE 8080
 
 ENTRYPOINT [ "python", "app.py" ]
