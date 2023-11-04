@@ -1,0 +1,10 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: comp1
+  namespace: kubeflow
+spec:
+  predictor:
+    containers:
+      - name: kserve-container
+        image: ${DOCKER_USER}/${IMG}:${VERSION}

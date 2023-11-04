@@ -1,23 +1,20 @@
 DOCKER_USER ?= joung6517
 IMG ?= comp1
 VERSION ?= v1
-PLATFORM ?= ''
+LOCAL_PORT ?= 6999
+SERVICE_FILENAME ?= inferenceService.yaml
 
-pack:
-	pack build --builder=heroku/buildpacks:20 ${DOCKER_USER}/${IMG}:${VERSION}
 docker-build:
 	docker build -t ${DOCKER_USER}/${IMG}:${VERSION} .
 docker-push: docker-build
 	docker push ${DOCKER_USER}/${IMG}:${VERSION}
-docker-push-mac: pack
-	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t ${DOCKER_USER}/${IMG}:${VERSION} --push .
-inspect-platforms:
-	docker buildx imagetools inspect ${DOCKER_USER}/${IMG}:${VERSION}
-local-test:
-	docker run -p 6999:8080 ${DOCKER_USER}/${IMG}:${VERSION}
-local-test-mac:
-	if [ -z ${PLATFORM} ]; then \
-		echo "ENTER ARGUMENT PLATFORM"; \
-		exit 1; \
-	fi
-	docker run -p 6999:8080 ${PLATFORM}
+docker-run:
+	docker run -p ${LOCAL_PORT}:8080 ${DOCKER_USER}/${IMG}:${VERSION}
+docker-run-test:
+	curl localhost:${LOCAL_PORT}/v1/models/comp1:predict -d @./input.json
+deploy:
+	export DOCKER_USER=${DOCKER_USER}; \
+	export IMG=${IMG}; \
+	export VERSION=${VERSION}; \
+	envsubst < ${SERVICE_FILENAME}.template > ${SERVICE_FILENAME}
+	kubectl apply -f ${SERVICE_FILENAME}

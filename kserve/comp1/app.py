@@ -1,7 +1,6 @@
 import json
-from typing import Dict, Union
+from typing import Dict
 from kserve import Model, ModelServer
-from kserve.protocol.infer_type import InferResponse
 
 
 class Comp1(Model):
