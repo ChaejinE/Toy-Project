@@ -17,7 +17,7 @@ function App() {
         >
           Learn React
         </a>
-        <button> 인사함 해봐라 !! </button>
+        <button> 인사함 해봐라 !!! </button>
       </header>
     </div>
   );
