@@ -50,12 +50,12 @@ echo ${PUBLIC_KEY} >> ~/.ssh/authorized_keys
 - You should add your local public key on deploy server
 - Or alternatively, use ```vim``` command and copy public key to authorized_keys file
 
+![Alt text](image.png)
+
 ```bash
 ssh-keygen
 ```
-- generate ssh key on teh server
-
-![Alt text](image.png)
+- generate ssh key on the server
 
 ```bash
 cat ~/.ssh/id_rsa.pub
@@ -63,6 +63,15 @@ cat ~/.ssh/id_rsa.pub
 - Through above command, you can get public key for cloning repository
 - And Enroll in your repository this public key
 - Dont hesitate with your local public key
+
+```bash
+sudo apt-get update
+sudo apt-get install build-essential
+sudo apt-get install curl
+curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -- 
+sudo apt-get install nodejs
+```
+- install nodejs:18
 
 ## Deploy using my-app-cicd.yaml
 - After removing button tag's annotation on src/App.js, Push code on Repository
