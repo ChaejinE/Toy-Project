@@ -72,7 +72,7 @@ curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash --
 sudo apt-get install nodejs
 ```
 - install nodejs:18
-
+ 
 ## Deploy using my-app-cicd.yaml
 - After removing button tag's annotation on src/App.js, Push code on Repository
 
