@@ -1,0 +1,45 @@
+name: MyApp-Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - cicd-demo-app/**
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - main
+      - develop
+    paths:
+      - cicd-demo-app/**
+
+jobs:
+  deploy-using-ssh:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Deploy using ssh
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOSTNAME: ${{secrets.SSH_HOST}}
+          USER_NAME: ${{secrets.USER_NAME}}
+          PROJECT_DIRECTORY: Toy-Project/cicd-docker-demo-app
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+              # Now we have got the access of EC2 and we will start the deploy .
+              cd /home/${USER_NAME}/${PROJECT_DIRECTORY} &&
+              git checkout main &&
+              git fetch --all &&
+              git reset --hard origin/main &&
+              git pull origin main &&
+              killall -9 node
+              sudo npm install && npm start
+              '
