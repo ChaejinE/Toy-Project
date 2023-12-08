@@ -37,6 +37,6 @@ jobs:
               # Now we have got the access of EC2 and we will start the deploy .
               cd ~/Toy-Project/cicd-demo-app &&
               git pull &&
-              killall -9 node &&
+              killall -9 node 2>/dev/null &&
               sudo npm install && npm start
               '
