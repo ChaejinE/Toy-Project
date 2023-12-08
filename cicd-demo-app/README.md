@@ -65,6 +65,11 @@ cat ~/.ssh/id_rsa.pub
 - Dont hesitate with your local public key
 
 ```bash
+cd ~
+git clone git@github.com:ChaejinE/Toy-Project.git
+```
+
+```bash
 sudo apt-get update
 sudo apt-get install build-essential
 sudo apt-get install curl
@@ -73,9 +78,16 @@ sudo apt-get install nodejs
 ```
 - install nodejs:18
 
+```bash
+cd Toy-Project/cicd-demo-app/hello-frontend
+npm install && npm run
+```
+- deploy your app 
+
 ## Deploy using my-app-cicd.yaml
 - After removing button tag's annotation on src/App.js, Push code on Repository
  
 ```bash
 git push origin main
 ```
+- Whenever changed code, push to repository using above command
