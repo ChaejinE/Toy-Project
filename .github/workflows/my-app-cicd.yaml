@@ -36,5 +36,5 @@ jobs:
           command="cd ${PROJECT_DIRECTORY} && \
                   git pull && \
                   killall -9 node 2>/dev/null || true && \
-                  sudo npm install && npm start"
+                  sudo npm install && nohup npm start &"
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} $command
