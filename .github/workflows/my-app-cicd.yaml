@@ -30,10 +30,10 @@ jobs:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           HOSTNAME: ${{secrets.SSH_HOST}}
           USER_NAME: ${{secrets.USER_NAME}}
-          PROJECT_DIRECTORY: Toy-Project/cicd-docker-demo-app/hello-frontend
+          PROJECT_DIRECTORY: ~/Toy-Project/cicd-demo-app/hello-frontend
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          command="cd ~/${PROJECT_DIRECTORY} && \
+          command="cd ${PROJECT_DIRECTORY} && \
                   git pull && \
                   killall -9 node 2>/dev/null || true && \
                   sudo npm install && npm start"
