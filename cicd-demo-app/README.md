@@ -56,7 +56,7 @@ echo ${PUBLIC_KEY} >> ~/.ssh/authorized_keys
 ssh-keygen
 ```
 - generate ssh key on the server
-
+ 
 ```bash
 cat ~/.ssh/id_rsa.pub
 ```
