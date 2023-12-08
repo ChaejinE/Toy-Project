@@ -35,7 +35,7 @@ jobs:
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
               # Now we have got the access of EC2 and we will start the deploy .
-              cd /home/${USER_NAME}/${PROJECT_DIRECTORY} &&
+              cd ~/${PROJECT_DIRECTORY} &&
               git checkout main &&
               git fetch --all &&
               git reset --hard origin/main &&
