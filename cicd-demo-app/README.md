@@ -38,7 +38,7 @@ docker run --rm -it -d -v ${LOCAL_PATH}:${CONTAINER_PATH} -p ${LOCAL_PORT}:${CON
 ## Repository Setup For CICD
 ![Alt text](image-1.png)
 - add secrets for deploy
-  - You can get private key using this code ```cat ~/.ssh/id_rsa```
+  - You can get private key using this code ```cat ~/.ssh/id_rsa``` on your local computer
   - If you dont have above private key, generate using this code    ```ssh-keygen``` or search on web
   - You might get id_rsa.pub(publick key), id_rsa(private key)
 
@@ -47,8 +47,22 @@ docker run --rm -it -d -v ${LOCAL_PATH}:${CONTAINER_PATH} -p ${LOCAL_PORT}:${CON
 PUBLIC_KEY=<Your id_rsa.pub file content>
 echo ${PUBLIC_KEY} >> ~/.ssh/authorized_keys
 ```
-- You should add your public key on deploy server
+- You should add your local public key on deploy server
 - Or alternatively, use ```vim``` command and copy public key to authorized_keys file
+
+```bash
+ssh-keygen
+```
+- generate ssh key on teh server
+
+![Alt text](image.png)
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+- Through above command, you can get public key for cloning repository
+- And Enroll in your repository this public key
+- Dont hesitate with your local public key
 
 ## Deploy using my-app-cicd.yaml
 - After removing button tag's annotation on src/App.js, Push code on Repository
