@@ -1,0 +1,13 @@
+FROM node:slim
+
+ARG MY_WORKDIR=hello-frontend
+WORKDIR /usr/src/app
+COPY ${MY_WORKDIR}/package.json .
+RUN npm install
+
+# add copy code files !
+COPY ${MY_WORKDIR} .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

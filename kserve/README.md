@@ -1,16 +1,22 @@
-# For Practice Setting
+# Setting
 ```
-pipenv install <packages>
+make docker-build
 ```
-- I installed packages and set environent using pipenv
+- It would operate for docker build
 
 ```
-pipenv requirements > <component-foldername>/requirements.txt
+make docker-push 
 ```
-- I freezed requirements.txt in specific component folder. This will be used by kserve app build & package
+- After ```docker login```, run above the command
+- It would operate for docker file build & push
+
+# Test
+```
+make docker-run
+```
+- Run builded or puhsed docker image
 
 ```
-make docker-push
+make docker-run-test
 ```
-- Make sure python version through ```runtime.txt```
-- After packaging component app, like ```return_a.py```, using Buildpacks, it will push on docker repository
+- Check result
