@@ -35,6 +35,7 @@ jobs:
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           command="cd ${PROJECT_DIRECTORY} && \
                   git pull && \
+                  npm install pm2@latest -g && \
                   killall -9 node 2>/dev/null || true && \
-                  sudo npm install && nohup npm start &"
+                  sudo npm install && pm2 start npm --name "node" -- start"
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} $command

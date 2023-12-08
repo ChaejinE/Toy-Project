@@ -86,7 +86,7 @@ npm install && npm run
 
 ## Deploy using my-app-cicd.yaml
 - After removing button tag's annotation on src/App.js, Push code on Repository
- 
+
 ```bash
 git push origin main
 ```
