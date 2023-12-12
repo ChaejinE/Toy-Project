@@ -24,8 +24,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-        with:
-          path: cicd-demo-app/hello-frontend
 
       - name: Setup nodejs
         uses: actions/setup-node@v3
@@ -34,7 +32,7 @@ jobs:
         
       - name: Install dependencies
         run: |
-          ls
+          ls -al
           cd cicd-demo-app/hello-frontend
           npm install
 
