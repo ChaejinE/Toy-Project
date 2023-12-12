@@ -24,12 +24,14 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+        with:
+          path: cicd-demo-app/hello-frontend
 
       - name: Setup nodejs
         uses: actions/setup-node@v3
         with:
           node-version: 20.10.0
-
+        
       - name: Install dependencies
         run: npm install
 
