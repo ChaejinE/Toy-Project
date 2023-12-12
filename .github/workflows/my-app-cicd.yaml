@@ -33,7 +33,10 @@ jobs:
           node-version: 20.10.0
         
       - name: Install dependencies
-        run: npm install
+        run: |
+          ls
+          cd cicd-demo-app/hello-frontend
+          npm install
 
       - name: Unittest
         run: npm test
