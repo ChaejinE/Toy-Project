@@ -54,8 +54,8 @@ jobs:
           host: ${{ secrets.HOST }}
           key: ${{ secrets.PRIVATE_KEY }}
           source: "cicd-demo-app/hello-frontend/build"
-          target: "/usr/share/nginx/html"
-          strip_components: 3
+          target: "/home/ubuntu"
+          strip_components: 2
           overwrite: True
 
       # https://github.com/ChaejinE/Toy-Project/actions
