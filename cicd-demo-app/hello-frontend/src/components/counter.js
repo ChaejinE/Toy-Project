@@ -13,7 +13,7 @@ export default function Counter() {
 
     return (
         <div>
-            <h2>Counter</h2>
+            <h2>Counter2</h2>
             <p>{count}</p>
             <button onClick={handleIncrement}>+</button>
             <button onClick={handleDecrement}>-</button>
