@@ -15,6 +15,7 @@ export default function Counter() {
         <div>
             <h2>Counter</h2>
             <p>{count}</p>
+            <p>안녕하세요 리효근님</p>
             <button onClick={handleIncrement}>+</button>
             <button onClick={handleDecrement}>-</button>
         </div>
