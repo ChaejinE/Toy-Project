@@ -53,8 +53,9 @@ jobs:
           # https://github.com/ChaejinE/Toy-Project/settings/secrets/actions
           host: ${{ secrets.HOST }}
           key: ${{ secrets.PRIVATE_KEY }}
-          source: "cicd-demo-app/hello-frontend/build/"
+          source: "cicd-demo-app/hello-frontend/build"
           target: "/tmp"
+          run: ls -al
 
       # https://github.com/ChaejinE/Toy-Project/actions
       
