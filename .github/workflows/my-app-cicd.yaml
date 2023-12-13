@@ -18,7 +18,7 @@ on:
       - cicd-demo-app/**
 
 jobs:
-  test:
+  react-cicd:
     name: unittest
     runs-on: ubuntu-latest
     steps:
@@ -28,11 +28,10 @@ jobs:
       - name: Setup nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: 20.10.0
+          node-version: 18.17.1
         
       - name: Install dependencies
         run: |
-          ls -al
           cd cicd-demo-app/hello-frontend
           npm install
 
@@ -40,6 +39,11 @@ jobs:
         run: |
           cd cicd-demo-app/hello-frontend
           npm test
+
+      - name: Build
+        run: |
+          cd cicd-demo-app/hello-frontend
+          npm build 
 
   # deploy-using-ssh:
   #   name: deploy
