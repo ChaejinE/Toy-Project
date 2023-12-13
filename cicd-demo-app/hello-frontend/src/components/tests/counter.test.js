@@ -1,7 +1,5 @@
 import Counter from "../counter.js";
 import { fireEvent, render, screen } from "@testing-library/react";
-// import { act } from "react-dom/test-utils";
-// import userEvent from "@testing-library/user-event";
 
 describe("Counter", () => {
   it("render correctly", () => {
@@ -15,10 +13,6 @@ describe("Counter", () => {
 
     
     fireEvent.click(button);
-
-    // act(() => {
-    //   userEvent.click(button);
-    // });
 
     expect(screen.getByText("1")).toBeInTheDocument();
   });

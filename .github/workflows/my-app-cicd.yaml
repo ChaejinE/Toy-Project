@@ -19,7 +19,7 @@ on:
 
 jobs:
   react-cicd:
-    name: unittest
+    name: My React CI/CD
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
