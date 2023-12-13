@@ -37,27 +37,29 @@ jobs:
           npm install
 
       - name: Unittest
-        run: npm test
-
-  deploy-using-ssh:
-    name: deploy
-    needs: ["test"]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Deploy using ssh
-        env:
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          HOSTNAME: ${{secrets.SSH_HOST}}
-          USER_NAME: ${{secrets.USER_NAME}}
-          PROJECT_DIRECTORY: ~/Toy-Project/cicd-demo-app/hello-frontend
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          command="cd ${PROJECT_DIRECTORY} && \
-                  git pull && \
-                  sudo npm install && sudo npm install pm2@latest -g && \
-                  sudo killall -9 node 2>/dev/null || true && \
-                  sudo pm2 start npm --name "node" -- start"
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} $command
+          cd cicd-demo-app/hello-frontend
+          npm test
+
+  # deploy-using-ssh:
+  #   name: deploy
+  #   needs: ["test"]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out code
+  #       uses: actions/checkout@v4
+
+  #     - name: Deploy using ssh
+  #       env:
+  #         PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+  #         HOSTNAME: ${{secrets.SSH_HOST}}
+  #         USER_NAME: ${{secrets.USER_NAME}}
+  #         PROJECT_DIRECTORY: ~/Toy-Project/cicd-demo-app/hello-frontend
+  #       run: |
+  #         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+  #         command="cd ${PROJECT_DIRECTORY} && \
+  #                 git pull && \
+  #                 sudo npm install && sudo npm install pm2@latest -g && \
+  #                 sudo killall -9 node 2>/dev/null || true && \
+  #                 sudo pm2 start npm --name "node" -- start"
+  #         ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} $command
