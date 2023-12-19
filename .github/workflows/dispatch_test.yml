@@ -3,9 +3,51 @@ name: Manual Trigger Workflow
 # Configure Manual Trigger
 on:
   workflow_dispatch:
+    inputs:
+      inputs_as_json:
+        default: ""
+        required: true
+        description: 'JSON FORMAT'
+
+env:
+  JSON_INPUT: ${{ github.event.inputs.inputs_as_json }}
 
 jobs:
-  build:
+  define-vars:
+    name: Define env vars
     runs-on: ubuntu-latest
     steps:
-      - run: echo hi
+      - name: define vars using json 
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo -e "name=$(echo $JSON_INPUT | jq ".name")" >> $GITHUB_ENV
+          echo -e "img=$(echo $JSON_INPUT | jq ".img")" >> $GITHUB_ENV
+          echo -e "dockerfile=$(echo $JSON_INPUT | jq ".dockerfile")" >> $GITHUB_ENV
+          echo -e "target_path=$(echo $JSON_INPUT | jq ".target_path")" >> $GITHUB_ENV
+          echo -e "helm_folder_path=$(echo $JSON_INPUT | jq ".helm_folder_path")" >> $GITHUB_ENV
+          stage=$(echo $JSON_INPUT | jq ".stage")
+          if [ -z stage ]; then
+            echo -e "stage=${{ github.ref_name }}"
+          else
+            echo -e "stage=$(echo ${JSON_INPUT} | jq ".stage")" >> $GITHUB_ENV
+          fi
+    outputs:
+        NAME: ${{ env.name }}
+        IMG: ${{ env.img }}
+        DOCKERFILE: ${{ env.dockerfile }}
+        TARGET_PATH: ${{ env.target_path }}
+        HELM_FOLDER_PATH: ${{ env.helm_folder_path }}
+        STAGE: ${{ env.stage }}
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo test
+        run: |
+          echo $NAME
+          echo $IMG
+          echo $DOCKERFILE
+          echo $TARGET_PATH
+          echo $HELM_FOLDER_PATH
+          echo $STAGE
