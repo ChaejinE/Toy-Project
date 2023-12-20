@@ -26,7 +26,8 @@ jobs:
           echo -e "target_path=$(echo $JSON_INPUT | jq ".target_path")" >> $GITHUB_ENV
           echo -e "helm_folder_path=$(echo $JSON_INPUT | jq ".helm_folder_path")" >> $GITHUB_ENV
           stage=$(echo $JSON_INPUT | jq ".stage")
-          if [ -z ${stage} ]; then
+          echo "stage is : $stage"
+          if [ -z $stage ]; then
             echo -e "stage=${{ github.ref_name }}" >> $GITHUB_ENV
             echo ref name : ${{ github.ref_name }}
           else
