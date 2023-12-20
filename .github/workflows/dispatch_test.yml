@@ -41,6 +41,8 @@ jobs:
 
   test:
     name: test
+    needs: 
+      - define-vars
     runs-on: ubuntu-latest
     steps:
       - name: echo test
