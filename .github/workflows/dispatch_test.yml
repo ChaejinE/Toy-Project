@@ -27,7 +27,8 @@ jobs:
           echo -e "helm_folder_path=$(echo $JSON_INPUT | jq ".helm_folder_path")" >> $GITHUB_ENV
           stage=$(echo $JSON_INPUT | jq ".stage")
           if [ -z stage ]; then
-            echo -e "stage=${{ github.ref_name }}"
+            echo -e "stage=${{ github.ref_name }}" >> $GITHUB_ENV
+            echo ref name : ${{ github.ref_name }}
           else
             echo -e "stage=$(echo ${JSON_INPUT} | jq ".stage")" >> $GITHUB_ENV
           fi
@@ -47,9 +48,9 @@ jobs:
     steps:
       - name: echo test
         run: |
-          echo $NAME
-          echo $IMG
-          echo $DOCKERFILE
-          echo $TARGET_PATH
-          echo $HELM_FOLDER_PATH
-          echo $STAGE
+          echo ${{ needs.define-vars.outputs.NAME }}
+          echo ${{ needs.define-vars.outputs.IMG }}
+          echo ${{ needs.define-vars.outputs.DOCKERFILE }}
+          echo ${{ needs.define-vars.outputs.TARGET_PATH }}
+          echo ${{ needs.define-vars.outputs.HELM_FOLDER_PATH }}
+          echo ${{ needs.define-vars.outputs.STAGE }}
