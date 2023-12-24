@@ -37,7 +37,12 @@ def scrap_linkedin_profile(api_endpoint: str):
 
 
 if __name__ == "__main__":
-    response = scrap_linkedin_profile(
-        api_endpoint="https://gist.githubusercontent.com/ChaejinE/81673f47a86e6a0fb0c0a4aa604e0809/raw/9e8dce0912d20c47d94027eb8581d3f9b756c20c/gistfile1.txt"
+    # response = scrap_linkedin_profile(
+    #     api_endpoint="https://gist.githubusercontent.com/ChaejinE/81673f47a86e6a0fb0c0a4aa604e0809/raw/9e8dce0912d20c47d94027eb8581d3f9b756c20c/gistfile1.txt"
+    # )
+    # print(response.json())
+
+    resp = scrap_linkedin_profile_origin(
+        "https://www.linkedin.com/in/eunji-yang-2727191b1/"
     )
-    print(response.json())
+    print(resp.json())
