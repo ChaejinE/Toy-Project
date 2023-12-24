@@ -5,10 +5,10 @@ from tools.tools import get_profile_url
 
 
 def lookup(name: str) -> str:
-    llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
+    llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo", max_tokens=None)
     # 군더더기 없는 응답을 받기위해 answer가 무엇인지를 명확히한다.
-    template = """given the full name {name_of_person} I want you to get it me a link to their Linkedin profile page.
-                Your answer should contain only a URL"""
+    template = """given the full name {name_of_person}, I want you to get it me a link to their Linkedin profile page.
+                Your answer should contain only a URL."""
 
     # Tool 마다 name은 required이며 고유해야한다.
     # function도 required 이며 LLM이 사용하기로 결정했을 경우 호출되는 함수다.
@@ -33,5 +33,12 @@ def lookup(name: str) -> str:
         template=template, input_variables=["name_of_person"]
     )
     linkedin_profile_url = agent.run(prompt_template.format_prompt(name_of_person=name))
+
+    protocol = "https"
+    prev, url = linkedin_profile_url.split(protocol)
+    if prev:
+        if url.endswith("."):
+            url = url[:-1]
+        linkedin_profile_url = protocol + url
 
     return linkedin_profile_url
