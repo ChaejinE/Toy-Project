@@ -2,6 +2,7 @@ from langchain import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 from third_parties.linkedin import scrap_linkedin_profile
+from agents.linkedin_lookup_agent import lookup as linkedin_lookup_agent
 
 information = """
     Elon Reeve Musk (/ˈiːlɒn/ EE-lon; born June 28, 1971) is a businessman and investor. He is the wealthiest person in the world, with an estimated net worth of US$222 billion as of December 2023, according to the Bloomberg Billionaires Index, and $244 billion according to Forbes, primarily from his ownership stakes in Tesla and SpaceX.[5][6] He is the founder, chairman, CEO, and chief technology officer of SpaceX; angel investor, CEO, product architect and former chairman of Tesla, Inc.; owner, chairman and CTO of X Corp.; founder of the Boring Company and xAI; co-founder of Neuralink and OpenAI; and president of the Musk Foundation.
@@ -30,8 +31,8 @@ if __name__ == "__main__":
 
     chain = LLMChain(llm=llm, prompt=summary_prompt_template)
 
-    linkedin_data = scrap_linkedin_profile(
-        api_endpoint="https://gist.githubusercontent.com/ChaejinE/81673f47a86e6a0fb0c0a4aa604e0809/raw/9e8dce0912d20c47d94027eb8581d3f9b756c20c/gistfile1.txt"
-    )
+    linkedin_profile_url = linkedin_lookup_agent(name="Eunji Yang")
+    # temp_url = "https://gist.githubusercontent.com/ChaejinE/81673f47a86e6a0fb0c0a4aa604e0809/raw/9e8dce0912d20c47d94027eb8581d3f9b756c20c/gistfile1.txt"
+    linkedin_data = scrap_linkedin_profile(api_endpoint=linkedin_profile_url)
 
     print(chain.run(information=linkedin_data))
